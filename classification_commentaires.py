@@ -9,7 +9,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
 
-# 1 Creation d'une base de commentaires
+# Creation d'une base de commentaires
 
 
 commentaires = [
@@ -87,7 +87,7 @@ print("Nombre d'observations :", len(df))
 print("Repartition des themes :")
 print(df["theme"].value_counts())
 
-# 2 Nettoyage simple du texte
+# Nettoyage simple du texte
 
 
 def nettoyer_texte(texte):
@@ -99,7 +99,7 @@ def nettoyer_texte(texte):
 
 df["commentaire_nettoye"] = df["commentaire"].apply(nettoyer_texte)
 
-# 3 Visualisation des themes
+# Visualisation des themes
 
 plt.figure(figsize=(8, 5))
 df["theme"].value_counts().plot(kind="bar")
@@ -111,7 +111,7 @@ plt.tight_layout()
 plt.savefig("sorties/graphiques/repartition_themes.png")
 plt.close()
 
-# 4 Preparation du modele
+#Preparation du modele
 
 
 X = df["commentaire_nettoye"]
@@ -137,7 +137,7 @@ X_test_tfidf = vectorizer.transform(X_test)
 
 
 
-# 5 Modele de classification
+# Modele de classification
 
 
 modele = LogisticRegression(max_iter=1000)
@@ -154,7 +154,7 @@ print(confusion_matrix(y_test, predictions))
 
 
 
-# 6 Sauvegarde des predictions
+# Sauvegarde des predictions
 
 
 resultats = pd.DataFrame({
@@ -189,7 +189,7 @@ print(importance_df)
 
 
 
-# 8 Graphique simple des mots importants
+# Graphique simple des mots importants
 
 
 for classe in classes:
@@ -202,6 +202,3 @@ for classe in classes:
     plt.tight_layout()
     plt.savefig("sorties/graphiques/mots_importants_" + classe + ".png")
     plt.close()
-
-
-print("Projet termine avec succes.")
